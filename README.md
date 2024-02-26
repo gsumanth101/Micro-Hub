@@ -30,19 +30,19 @@ These are the sample outcomes of our project only for student login and further 
 
 ![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/b8a5380e-517f-409b-aea9-0660e2961a31)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/d45f6210-0dd1-46d9-9826-66048b999526)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/2d636851-f41a-4c08-acbd-76adc14d3a30)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/ef2520e4-89c0-4dbf-956f-b153ae17c812)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/43a91488-506e-4e38-b04d-c11ed50c4865)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/774d31e1-ba6a-405e-ba08-c96ed672b12e)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/cb7dfea1-2717-4653-9bf1-deef437a74a7)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/717ca7a5-9557-4bd3-8d73-c698ea382ba7)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/3520c061-a936-4293-a571-31e12e576de3)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/04e67d2a-721c-4431-ad56-04a691ede0af)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/2015d406-1466-4433-a211-ee8520c482a1)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/9003964c-e984-495f-ad24-1a304ba3056f)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/caa6365b-93e8-4cfc-8b85-1c5915df2d68)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/1459730e-ccce-4027-9339-ffab545a5931)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/a09da6d3-9725-4d27-b6a8-c5c18538d9f6)
 
 ## Installation:
 
