@@ -28,13 +28,13 @@ The Micro-Hub is a technical platform designed to streamline the registration, e
 ## Output:
 These are the sample outcomes of our project only for student login and further details...........
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/b8a5380e-517f-409b-aea9-0660e2961a31)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/9d1e07ab-2910-4f17-aec9-671698fb9a13)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/2d636851-f41a-4c08-acbd-76adc14d3a30)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/56811f02-b977-42f8-85a1-7395a99d98b8)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/43a91488-506e-4e38-b04d-c11ed50c4865)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/0e56eba1-58a0-4a49-a9e3-00720725d71c)
 
-![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/cb7dfea1-2717-4653-9bf1-deef437a74a7)
+![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/ba7eb7f3-112d-4cb5-adee-5da291f29b75)
 
 ![image](https://github.com/BRUNDAVANAMSUREKHA/Micro-Hub/assets/122956099/3520c061-a936-4293-a571-31e12e576de3)
 
