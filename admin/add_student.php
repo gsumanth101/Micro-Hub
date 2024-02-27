@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $addPass = password_hash($_POST['addPass'], PASSWORD_DEFAULT); // Hash the password
 
     // Check if the username already exists
-    $stmtCheck = $conn->prepare("SELECT * FROM Student WHERE username = ?");
+    $stmtCheck = $conn->prepare("SELECT * FROM student WHERE username = ?");
     $stmtCheck->bind_param("s", $addUsername);
     $stmtCheck->execute();
     $resultCheck = $stmtCheck->get_result();
