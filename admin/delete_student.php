@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $StudentUsername = $_POST['StudentUsername'];
 
     // Delete the Student record from the database
-    $sql = "DELETE FROM Student WHERE username='$StudentUsername'";
+    $sql = "DELETE FROM student WHERE username='$StudentUsername'";
     
     if ($conn->query($sql) === TRUE) {
         // Redirect to the page where you display students
