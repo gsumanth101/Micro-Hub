@@ -11,7 +11,7 @@ $search_condition = isset($_GET['search']) ? $_GET['search'] : '';
 $search_condition = $search_condition ? "WHERE username LIKE '%$search_condition%' OR name LIKE '%$search_condition%' OR section LIKE '%$search_condition%' OR year LIKE '%$search_condition%' OR dept LIKE '%$search_condition%'" : '';
 
 // SQL query to fetch Student details with pagination and search
-$sql = "SELECT * FROM Student $search_condition LIMIT $offset, $results_per_page";
+$sql = "SELECT * FROM student $search_condition LIMIT $offset, $results_per_page";
 $result = $conn->query($sql);
 
 // Serial number initialization
