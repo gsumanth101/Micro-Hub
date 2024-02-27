@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmtCheck->close();
 
     // Insert the new Student record into the database
-    $stmtInsert = $conn->prepare("INSERT INTO Student (username, name,faculty, section,  year, dept, password) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmtInsert = $conn->prepare("INSERT INTO student (username, name,faculty, section,  year, dept, password) VALUES (?, ?, ?, ?, ?, ?)");
     $stmtInsert->bind_param("ssssss", $addUsername, $addName,$addfaculty ,$addSec, $addYear, $adddept, $addPass);
 
     if ($stmtInsert->execute()) {
