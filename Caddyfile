@@ -1,0 +1,22 @@
+# Replace localhost with your domain name
+
+http://localhost {
+    root * /var/www/html
+    php_fastcgi php-fpm:9000
+    file_server
+
+    # Reverse proxy to phpMyAdmin
+    reverse_proxy /phpmyadmin/* phpmyadmin:80
+}
+
+https://localhost {
+    root * /var/www/html
+    php_fastcgi php-fpm:9000
+    file_server
+
+    # Reverse proxy to phpMyAdmin
+    reverse_proxy /phpmyadmin/* phpmyadmin:80
+
+    # Self-signed certificate for local development (remove for production)
+    tls internal
+}                                                 
