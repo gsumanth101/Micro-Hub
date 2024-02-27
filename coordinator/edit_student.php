@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $StudentUsername = $_POST['StudentUsername'];
 
     // Update the Student record in the database
-    $sql = "UPDATE Student SET name='$editName', section='$editSec', year='$editYear', dept='$editdept',faculty='$editfaculty' WHERE username='$StudentUsername'";
+    $sql = "UPDATE student SET name='$editName', section='$editSec', year='$editYear', dept='$editdept',faculty='$editfaculty' WHERE username='$StudentUsername'";
     
     if ($conn->query($sql) === TRUE) {
         // Redirect to the page where you display coordinators
