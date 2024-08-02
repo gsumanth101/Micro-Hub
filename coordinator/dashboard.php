@@ -29,7 +29,7 @@ if ($resultStudent && $resultStudent->num_rows > 0) {
 }
 
 $microCount = 0;
-$sqlMicro = "SELECT COUNT(*) as count FROM micro_project";
+$sqlMicro = "SELECT COUNT(*) as count FROM caps_teams";
 $resultMicro = $conn->query($sqlMicro);
 if ($resultMicro && $resultMicro->num_rows > 0) {
     $row = $resultMicro->fetch_assoc();
@@ -131,12 +131,12 @@ if ($resultMicro_regd && $resultMicro_regd->num_rows > 0) {
                     <div class="inner">
                         <!-- Replace '44' with the actual count of Student records -->
                         <h3><?php echo $microCount; ?></h3>
-                        <p>Micro Project Submissions</p>
+                        <p>Capstone project</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="micro_projectSubmit.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="intern_teams.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 

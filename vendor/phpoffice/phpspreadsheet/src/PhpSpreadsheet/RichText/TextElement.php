@@ -14,12 +14,12 @@ class TextElement implements ITextElement
     /**
      * Create a new TextElement instance.
      *
-     * @param string $text Text
+     * @param string $pText Text
      */
-    public function __construct($text = '')
+    public function __construct($pText = '')
     {
         // Initialise variables
-        $this->text = $text;
+        $this->text = $pText;
     }
 
     /**
@@ -35,9 +35,9 @@ class TextElement implements ITextElement
     /**
      * Set text.
      *
-     * @param string $text Text
+     * @param $text string Text
      *
-     * @return $this
+     * @return ITextElement
      */
     public function setText($text)
     {
@@ -49,7 +49,7 @@ class TextElement implements ITextElement
     /**
      * Get font.
      *
-     * @return null|\PhpOffice\PhpSpreadsheet\Style\Font
+     * @return \PhpOffice\PhpSpreadsheet\Style\Font
      */
     public function getFont()
     {
@@ -67,5 +67,20 @@ class TextElement implements ITextElement
             $this->text .
             __CLASS__
         );
+    }
+
+    /**
+     * Implement PHP __clone to create a deep clone, not just a shallow copy.
+     */
+    public function __clone()
+    {
+        $vars = get_object_vars($this);
+        foreach ($vars as $key => $value) {
+            if (is_object($value)) {
+                $this->$key = clone $value;
+            } else {
+                $this->$key = $value;
+            }
+        }
     }
 }

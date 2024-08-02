@@ -47,7 +47,8 @@ class CholeskyDecomposition
      *
      *    Class constructor - decomposes symmetric positive definite matrix
      *
-     * @param Matrix $A Matrix square symmetric positive definite matrix
+     * @param mixed Matrix square symmetric positive definite matrix
+     * @param null|mixed $A
      */
     public function __construct(Matrix $A)
     {
@@ -103,7 +104,7 @@ class CholeskyDecomposition
     /**
      * Solve A*X = B.
      *
-     * @param Matrix $B Row-equal matrix
+     * @param $B Row-equal matrix
      *
      * @return Matrix L * L' * X = B
      */
@@ -111,7 +112,7 @@ class CholeskyDecomposition
     {
         if ($B->getRowDimension() == $this->m) {
             if ($this->isspd) {
-                $X = $B->getArray();
+                $X = $B->getArrayCopy();
                 $nx = $B->getColumnDimension();
 
                 for ($k = 0; $k < $this->m; ++$k) {

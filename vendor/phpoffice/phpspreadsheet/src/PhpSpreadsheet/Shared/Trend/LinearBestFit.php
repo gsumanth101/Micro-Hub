@@ -9,7 +9,7 @@ class LinearBestFit extends BestFit
      * (Name of this Trend class).
      *
      * @var string
-     */
+     **/
     protected $bestFitType = 'linear';
 
     /**
@@ -18,7 +18,7 @@ class LinearBestFit extends BestFit
      * @param float $xValue X-Value
      *
      * @return float Y-Value
-     */
+     **/
     public function getValueOfYForX($xValue)
     {
         return $this->getIntersect() + $this->getSlope() * $xValue;
@@ -30,7 +30,7 @@ class LinearBestFit extends BestFit
      * @param float $yValue Y-Value
      *
      * @return float X-Value
-     */
+     **/
     public function getValueOfXForY($yValue)
     {
         return ($yValue - $this->getIntersect()) / $this->getSlope();
@@ -42,7 +42,7 @@ class LinearBestFit extends BestFit
      * @param int $dp Number of places of decimal precision to display
      *
      * @return string
-     */
+     **/
     public function getEquation($dp = 0)
     {
         $slope = $this->getSlope($dp);
@@ -56,8 +56,9 @@ class LinearBestFit extends BestFit
      *
      * @param float[] $yValues The set of Y-values for this regression
      * @param float[] $xValues The set of X-values for this regression
+     * @param bool $const
      */
-    private function linearRegression(array $yValues, array $xValues, bool $const): void
+    private function linearRegression($yValues, $xValues, $const)
     {
         $this->leastSquareFit($yValues, $xValues, $const);
     }
@@ -71,10 +72,8 @@ class LinearBestFit extends BestFit
      */
     public function __construct($yValues, $xValues = [], $const = true)
     {
-        parent::__construct($yValues, $xValues);
-
-        if (!$this->error) {
-            $this->linearRegression($yValues, $xValues, (bool) $const);
+        if (parent::__construct($yValues, $xValues) !== false) {
+            $this->linearRegression($yValues, $xValues, $const);
         }
     }
 }

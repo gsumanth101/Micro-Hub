@@ -210,12 +210,12 @@ $stmt->close();
 
 <!--###################### End Micro Project #################################-->
 
-<!--######################  Community Service project #################################-->
-      <!--<li class="nav-item">
+<!--######################  Capstone Project #################################-->
+      <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-copy"></i>
           <p>
-            CSP
+            Capstone Project
             <i class="fas fa-angle-left right"></i>
             <span class="badge badge-info right"></span>
           </p>
@@ -223,12 +223,12 @@ $stmt->close();
       
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="not_opened.php" class="nav-link">
+            <a href="caps_teams.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
-              <p>Registrations</p>
+              <p>Team Details</p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../not_opened.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Reviews</p>
@@ -239,16 +239,16 @@ $stmt->close();
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Final Submission</p>
             </a>
-          </li>
+          </li> -->
  
         </ul>
-      </li>-->
+      </li>
 
 
-<!--###################### End Community Service project #################################-->
+<!--###################### Capstone Project #################################-->
 
 <!--###################### Hackerthon #################################-->
-      <!--<li class="nav-item">
+      <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-chart-pie"></i>
           <p>
@@ -264,13 +264,19 @@ $stmt->close();
             </a>
           </li>
           <li class="nav-item">
-            <a href="not_opened.php" class="nav-link">
+            <a href="hack_sub.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Submission</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="bench_cod.php" class="nav-link">
+              <i class="fa fa-light fa-caret-right nav-icon"></i>
+              <p>Slot Coordinator</p>
+            </a>
+          </li>
         </ul>
-      </li>-->
+      </li>
 <!--###################### Hackerthon #################################-->
 
 <!--###################### International Certification #################################-->
@@ -284,7 +290,15 @@ $stmt->close();
 
 </li>-->
 <!--###################### International Certification #################################-->
+<li class="nav-item">
+  <a href="intern_teams.php" class="nav-link">
+    <i class="nav-icon fa fa-inbox aria-hidden="true"></i>
+    <p>
+      internship
+    </p>
+  </a>
 
+</li>
 <!--######################   Non CGPA  ###########################3-->
 
 <!--############################# Group 1 ###################################-->

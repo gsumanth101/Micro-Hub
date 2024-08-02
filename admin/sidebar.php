@@ -233,6 +233,18 @@ $stmt->close();
               <p>Add Student</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="upload_internship.php" class="nav-link">
+              <i class="fa fa-light fa-caret-right nav-icon"></i>
+              <p>Add Internship</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="upload_caps.php" class="nav-link">
+              <i class="fa fa-light fa-caret-right nav-icon"></i>
+              <p>Add Capston</p>
+            </a>
+          </li>
  <!--        <li class="nav-item">
             <a href="../../index3.html" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
@@ -312,12 +324,12 @@ $stmt->close();
 
 <!--###################### End Community Service project #################################-->
 
-<!--###################### Hackerthon #################################-->
-   <!--   <li class="nav-item">
+<!--###################### Internship #################################-->
+      <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-chart-pie"></i>
           <p>
-            Hackerthon
+            Internship
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -325,7 +337,7 @@ $stmt->close();
           <li class="nav-item">
             <a href="../charts/chartjs.html" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
-              <p>Registration</p>
+              <p>Teams Upload</p>
             </a>
           </li>
           <li class="nav-item">
@@ -335,7 +347,7 @@ $stmt->close();
             </a>
           </li>
         </ul> 
-      </li>-->
+      </li>
 <!--###################### Hackerthon #################################-->
 
 <!--###################### International Certification #################################-->

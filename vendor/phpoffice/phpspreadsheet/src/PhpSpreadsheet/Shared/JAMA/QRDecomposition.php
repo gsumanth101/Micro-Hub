@@ -15,9 +15,9 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalculationException;
  *    of simultaneous linear equations.  This will fail if isFullRank()
  *    returns false.
  *
- * @author  Paul Meagher
+ *    @author  Paul Meagher
  *
- * @version 1.1
+ *    @version 1.1
  */
 class QRDecomposition
 {
@@ -54,43 +54,49 @@ class QRDecomposition
     /**
      * QR Decomposition computed by Householder reflections.
      *
-     * @param Matrix $A Rectangular matrix
+     * @param matrix $A Rectangular matrix
+     *
+     * @return Structure to access R and the Householder vectors and compute Q
      */
-    public function __construct(Matrix $A)
+    public function __construct($A)
     {
-        // Initialize.
-        $this->QR = $A->getArray();
-        $this->m = $A->getRowDimension();
-        $this->n = $A->getColumnDimension();
-        // Main loop.
-        for ($k = 0; $k < $this->n; ++$k) {
-            // Compute 2-norm of k-th column without under/overflow.
-            $nrm = 0.0;
-            for ($i = $k; $i < $this->m; ++$i) {
-                $nrm = hypo($nrm, $this->QR[$i][$k]);
-            }
-            if ($nrm != 0.0) {
-                // Form k-th Householder vector.
-                if ($this->QR[$k][$k] < 0) {
-                    $nrm = -$nrm;
-                }
+        if ($A instanceof Matrix) {
+            // Initialize.
+            $this->QR = $A->getArrayCopy();
+            $this->m = $A->getRowDimension();
+            $this->n = $A->getColumnDimension();
+            // Main loop.
+            for ($k = 0; $k < $this->n; ++$k) {
+                // Compute 2-norm of k-th column without under/overflow.
+                $nrm = 0.0;
                 for ($i = $k; $i < $this->m; ++$i) {
-                    $this->QR[$i][$k] /= $nrm;
+                    $nrm = hypo($nrm, $this->QR[$i][$k]);
                 }
-                $this->QR[$k][$k] += 1.0;
-                // Apply transformation to remaining columns.
-                for ($j = $k + 1; $j < $this->n; ++$j) {
-                    $s = 0.0;
-                    for ($i = $k; $i < $this->m; ++$i) {
-                        $s += $this->QR[$i][$k] * $this->QR[$i][$j];
+                if ($nrm != 0.0) {
+                    // Form k-th Householder vector.
+                    if ($this->QR[$k][$k] < 0) {
+                        $nrm = -$nrm;
                     }
-                    $s = -$s / $this->QR[$k][$k];
                     for ($i = $k; $i < $this->m; ++$i) {
-                        $this->QR[$i][$j] += $s * $this->QR[$i][$k];
+                        $this->QR[$i][$k] /= $nrm;
+                    }
+                    $this->QR[$k][$k] += 1.0;
+                    // Apply transformation to remaining columns.
+                    for ($j = $k + 1; $j < $this->n; ++$j) {
+                        $s = 0.0;
+                        for ($i = $k; $i < $this->m; ++$i) {
+                            $s += $this->QR[$i][$k] * $this->QR[$i][$j];
+                        }
+                        $s = -$s / $this->QR[$k][$k];
+                        for ($i = $k; $i < $this->m; ++$i) {
+                            $this->QR[$i][$j] += $s * $this->QR[$i][$k];
+                        }
                     }
                 }
+                $this->Rdiag[$k] = -$nrm;
             }
-            $this->Rdiag[$k] = -$nrm;
+        } else {
+            throw new CalculationException(Matrix::ARGUMENT_TYPE_EXCEPTION);
         }
     }
 
@@ -121,7 +127,6 @@ class QRDecomposition
      */
     public function getH()
     {
-        $H = [];
         for ($i = 0; $i < $this->m; ++$i) {
             for ($j = 0; $j < $this->n; ++$j) {
                 if ($i >= $j) {
@@ -144,7 +149,6 @@ class QRDecomposition
      */
     public function getR()
     {
-        $R = [];
         for ($i = 0; $i < $this->n; ++$i) {
             for ($j = 0; $j < $this->n; ++$j) {
                 if ($i < $j) {
@@ -169,7 +173,6 @@ class QRDecomposition
      */
     public function getQ()
     {
-        $Q = [];
         for ($k = $this->n - 1; $k >= 0; --$k) {
             for ($i = 0; $i < $this->m; ++$i) {
                 $Q[$i][$k] = 0.0;
@@ -188,7 +191,15 @@ class QRDecomposition
                 }
             }
         }
-
+        /*
+        for($i = 0; $i < count($Q); ++$i) {
+            for($j = 0; $j < count($Q); ++$j) {
+                if (! isset($Q[$i][$j]) ) {
+                    $Q[$i][$j] = 0;
+                }
+            }
+        }
+        */
         return new Matrix($Q);
     }
 
@@ -201,13 +212,13 @@ class QRDecomposition
      *
      * @return Matrix matrix that minimizes the two norm of Q*R*X-B
      */
-    public function solve(Matrix $B)
+    public function solve($B)
     {
         if ($B->getRowDimension() == $this->m) {
             if ($this->isFullRank()) {
                 // Copy right hand side
                 $nx = $B->getColumnDimension();
-                $X = $B->getArray();
+                $X = $B->getArrayCopy();
                 // Compute Y = transpose(Q)*B
                 for ($k = 0; $k < $this->n; ++$k) {
                     for ($j = 0; $j < $nx; ++$j) {

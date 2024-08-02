@@ -1,5 +1,4 @@
 <?php
-
 /**
  *    Pythagorean Theorem:.
  *
@@ -12,8 +11,6 @@
  *
  * @param mixed $a
  * @param mixed $b
- *
- * @return float
  */
 function hypo($a, $b)
 {

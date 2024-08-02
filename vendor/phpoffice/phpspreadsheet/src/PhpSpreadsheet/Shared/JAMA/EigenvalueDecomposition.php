@@ -18,9 +18,9 @@ namespace PhpOffice\PhpSpreadsheet\Shared\JAMA;
  *    conditioned, or even singular, so the validity of the equation
  *    A = V*D*inverse(V) depends upon V.cond().
  *
- * @author  Paul Meagher
+ *    @author  Paul Meagher
  *
- * @version 1.1
+ *    @version 1.1
  */
 class EigenvalueDecomposition
 {
@@ -37,7 +37,6 @@ class EigenvalueDecomposition
      * @var array
      */
     private $d = [];
-
     private $e = [];
 
     /**
@@ -67,25 +66,18 @@ class EigenvalueDecomposition
      * @var float
      */
     private $cdivr;
-
     private $cdivi;
-
-    /**
-     * @var array
-     */
-    private $A;
 
     /**
      * Symmetric Householder reduction to tridiagonal form.
      */
-    private function tred2(): void
+    private function tred2()
     {
         //  This is derived from the Algol procedures tred2 by
         //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
         //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
         //  Fortran subroutine in EISPACK.
         $this->d = $this->V[$this->n - 1];
-        $j = 0;
         // Householder reduction to tridiagonal form.
         for ($i = $this->n - 1; $i > 0; --$i) {
             $i_ = $i - 1;
@@ -102,7 +94,7 @@ class EigenvalueDecomposition
                 // Generate Householder vector.
                 for ($k = 0; $k < $i; ++$k) {
                     $this->d[$k] /= $scale;
-                    $h += $this->d[$k] ** 2;
+                    $h += pow($this->d[$k], 2);
                 }
                 $f = $this->d[$i_];
                 $g = sqrt($h);
@@ -186,7 +178,7 @@ class EigenvalueDecomposition
      *    Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
      * Fortran subroutine in EISPACK.
      */
-    private function tql2(): void
+    private function tql2()
     {
         for ($i = 1; $i < $this->n; ++$i) {
             $this->e[$i - 1] = $this->e[$i];
@@ -194,7 +186,7 @@ class EigenvalueDecomposition
         $this->e[$this->n - 1] = 0.0;
         $f = 0.0;
         $tst1 = 0.0;
-        $eps = 2.0 ** (-52.0);
+        $eps = pow(2.0, -52.0);
 
         for ($l = 0; $l < $this->n; ++$l) {
             // Find small subdiagonal element
@@ -212,7 +204,7 @@ class EigenvalueDecomposition
                 $iter = 0;
                 do {
                     // Could check iteration count here.
-                    ++$iter;
+                    $iter += 1;
                     // Compute implicit shift
                     $g = $this->d[$l];
                     $p = ($this->d[$l + 1] - $g) / (2.0 * $this->e[$l]);
@@ -293,7 +285,7 @@ class EigenvalueDecomposition
      *    Vol.ii-Linear Algebra, and the corresponding
      * Fortran subroutines in EISPACK.
      */
-    private function orthes(): void
+    private function orthes()
     {
         $low = 0;
         $high = $this->n - 1;
@@ -378,7 +370,7 @@ class EigenvalueDecomposition
      * @param mixed $yr
      * @param mixed $yi
      */
-    private function cdiv($xr, $xi, $yr, $yi): void
+    private function cdiv($xr, $xi, $yr, $yi)
     {
         if (abs($yr) > abs($yi)) {
             $r = $yi / $yr;
@@ -401,21 +393,21 @@ class EigenvalueDecomposition
      *    Vol.ii-Linear Algebra, and the corresponding
      * Fortran subroutine in EISPACK.
      */
-    private function hqr2(): void
+    private function hqr2()
     {
         //  Initialize
         $nn = $this->n;
         $n = $nn - 1;
         $low = 0;
         $high = $nn - 1;
-        $eps = 2.0 ** (-52.0);
+        $eps = pow(2.0, -52.0);
         $exshift = 0.0;
         $p = $q = $r = $s = $z = 0;
         // Store roots isolated by balanc and compute matrix norm
         $norm = 0.0;
 
         for ($i = 0; $i < $nn; ++$i) {
-            if ($i > $high) {
+            if (($i < $low) or ($i > $high)) {
                 $this->d[$i] = $this->H[$i][$i];
                 $this->e[$i] = 0.0;
             }
@@ -447,7 +439,7 @@ class EigenvalueDecomposition
                 $this->e[$n] = 0.0;
                 --$n;
                 $iter = 0;
-            // Two roots found
+                // Two roots found
             } elseif ($l == $n - 1) {
                 $w = $this->H[$n][$n - 1] * $this->H[$n - 1][$n];
                 $p = ($this->H[$n - 1][$n - 1] - $this->H[$n][$n]) / 2.0;
@@ -495,7 +487,7 @@ class EigenvalueDecomposition
                         $this->V[$i][$n - 1] = $q * $z + $p * $this->V[$i][$n];
                         $this->V[$i][$n] = $q * $this->V[$i][$n] - $p * $z;
                     }
-                // Complex pair
+                    // Complex pair
                 } else {
                     $this->d[$n - 1] = $x + $p;
                     $this->d[$n] = $x + $p;
@@ -504,7 +496,7 @@ class EigenvalueDecomposition
                 }
                 $n = $n - 2;
                 $iter = 0;
-            // No convergence yet
+                // No convergence yet
             } else {
                 // Form shift
                 $x = $this->H[$n][$n];
@@ -559,10 +551,8 @@ class EigenvalueDecomposition
                     if ($m == $l) {
                         break;
                     }
-                    if (
-                        abs($this->H[$m][$m - 1]) * (abs($q) + abs($r)) <
-                        $eps * (abs($p) * (abs($this->H[$m - 1][$m - 1]) + abs($z) + abs($this->H[$m + 1][$m + 1])))
-                    ) {
+                    if (abs($this->H[$m][$m - 1]) * (abs($q) + abs($r)) <
+                        $eps * (abs($p) * (abs($this->H[$m - 1][$m - 1]) + abs($z) + abs($this->H[$m + 1][$m + 1])))) {
                         break;
                     }
                     --$m;
@@ -671,7 +661,7 @@ class EigenvalueDecomposition
                             } else {
                                 $this->H[$i][$n] = -$r / ($eps * $norm);
                             }
-                        // Solve real equations
+                            // Solve real equations
                         } else {
                             $x = $this->H[$i][$i + 1];
                             $y = $this->H[$i + 1][$i];
@@ -693,7 +683,7 @@ class EigenvalueDecomposition
                         }
                     }
                 }
-            // Complex vector
+                // Complex vector
             } elseif ($q < 0) {
                 $l = $n - 1;
                 // Last vector component imaginary so matrix is triangular
@@ -762,7 +752,7 @@ class EigenvalueDecomposition
 
         // Vectors of isolated roots
         for ($i = 0; $i < $nn; ++$i) {
-            if ($i > $high) {
+            if ($i < $low | $i > $high) {
                 for ($j = $i; $j < $nn; ++$j) {
                     $this->V[$i][$j] = $this->H[$i][$j];
                 }
@@ -787,9 +777,12 @@ class EigenvalueDecomposition
     /**
      * Constructor: Check for symmetry, then construct the eigenvalue decomposition.
      *
-     * @param Matrix $Arg A Square matrix
+     * @param A Square matrix
+     * @param mixed $Arg
+     *
+     * @return Structure to access D and V
      */
-    public function __construct(Matrix $Arg)
+    public function __construct($Arg)
     {
         $this->A = $Arg->getArray();
         $this->n = $Arg->getColumnDimension();
@@ -820,7 +813,7 @@ class EigenvalueDecomposition
     /**
      * Return the eigenvector matrix.
      *
-     * @return Matrix V
+     * @return V
      */
     public function getV()
     {
@@ -830,7 +823,7 @@ class EigenvalueDecomposition
     /**
      * Return the real parts of the eigenvalues.
      *
-     * @return array real(diag(D))
+     * @return real(diag(D))
      */
     public function getRealEigenvalues()
     {
@@ -840,7 +833,7 @@ class EigenvalueDecomposition
     /**
      * Return the imaginary parts of the eigenvalues.
      *
-     * @return array imag(diag(D))
+     * @return imag(diag(D))
      */
     public function getImagEigenvalues()
     {
@@ -850,11 +843,10 @@ class EigenvalueDecomposition
     /**
      * Return the block diagonal eigenvalue matrix.
      *
-     * @return Matrix D
+     * @return D
      */
     public function getD()
     {
-        $D = [];
         for ($i = 0; $i < $this->n; ++$i) {
             $D[$i] = array_fill(0, $this->n, 0.0);
             $D[$i][$i] = $this->d[$i];

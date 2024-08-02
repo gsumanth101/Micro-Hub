@@ -65,6 +65,8 @@ class LUDecomposition
      * LU Decomposition constructor.
      *
      * @param Matrix $A Rectangular matrix
+     *
+     * @return Structure to access L, U and piv
      */
     public function __construct($A)
     {
@@ -135,7 +137,6 @@ class LUDecomposition
      */
     public function getL()
     {
-        $L = [];
         for ($i = 0; $i < $this->m; ++$i) {
             for ($j = 0; $j < $this->n; ++$j) {
                 if ($i > $j) {
@@ -160,7 +161,6 @@ class LUDecomposition
      */
     public function getU()
     {
-        $U = [];
         for ($i = 0; $i < $this->n; ++$i) {
             for ($j = 0; $j < $this->n; ++$j) {
                 if ($i <= $j) {
@@ -221,7 +221,7 @@ class LUDecomposition
     /**
      * Count determinants.
      *
-     * @return float
+     * @return array d matrix deterninat
      */
     public function det()
     {
@@ -242,11 +242,14 @@ class LUDecomposition
     /**
      * Solve A*X = B.
      *
-     * @param Matrix $B a Matrix with as many rows as A and any number of columns
+     * @param $B a Matrix with as many rows as A and any number of columns
      *
-     * @return Matrix X so that L*U*X = B(piv,:)
+     * @throws CalculationException illegalArgumentException Matrix row dimensions must agree
+     * @throws CalculationException runtimeException  Matrix is singular
+     *
+     * @return X so that L*U*X = B(piv,:)
      */
-    public function solve(Matrix $B)
+    public function solve($B)
     {
         if ($B->getRowDimension() == $this->m) {
             if ($this->isNonsingular()) {

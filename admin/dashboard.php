@@ -51,6 +51,14 @@ if ($resultMicro_regd && $resultMicro_regd->num_rows > 0) {
     $row = $resultMicro_regd->fetch_assoc();
     $micro_regd_Count = $row['count'];
 }
+
+$Intern_pending = 0;
+$sqlIntern_regd = "SELECT COUNT(*) as count FROM team_assignments;";
+$resultIntern_regd = $conn->query($sqlIntern_regd);
+if ($resultIntern_regd && $resultIntern_regd->num_rows > 0) {
+    $row = $resultIntern_regd->fetch_assoc();
+    $Intern_pending = $row['count'];
+}
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -166,6 +174,20 @@ if ($resultMicro_regd && $resultMicro_regd->num_rows > 0) {
                 </div>
             </div>
             <!-- Add more small boxes for other statistics if needed -->
+            <div class="col-lg-3 col-6">
+                <!-- Faculty Details Box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <!-- Replace '53' with the actual count of Faculty records -->
+                        <h3><?php echo $Intern_pending; ?></h3>
+                        <p>Internship</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-university"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
 
         </div>
         <!-- /.row -->

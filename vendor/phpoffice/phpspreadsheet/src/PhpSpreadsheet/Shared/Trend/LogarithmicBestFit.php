@@ -9,7 +9,7 @@ class LogarithmicBestFit extends BestFit
      * (Name of this Trend class).
      *
      * @var string
-     */
+     **/
     protected $bestFitType = 'logarithmic';
 
     /**
@@ -18,7 +18,7 @@ class LogarithmicBestFit extends BestFit
      * @param float $xValue X-Value
      *
      * @return float Y-Value
-     */
+     **/
     public function getValueOfYForX($xValue)
     {
         return $this->getIntersect() + $this->getSlope() * log($xValue - $this->xOffset);
@@ -30,7 +30,7 @@ class LogarithmicBestFit extends BestFit
      * @param float $yValue Y-Value
      *
      * @return float X-Value
-     */
+     **/
     public function getValueOfXForY($yValue)
     {
         return exp(($yValue - $this->getIntersect()) / $this->getSlope());
@@ -42,13 +42,13 @@ class LogarithmicBestFit extends BestFit
      * @param int $dp Number of places of decimal precision to display
      *
      * @return string
-     */
+     **/
     public function getEquation($dp = 0)
     {
         $slope = $this->getSlope($dp);
         $intersect = $this->getIntersect($dp);
 
-        return 'Y = ' . $slope . ' * log(' . $intersect . ' * X)';
+        return 'Y = ' . $intersect . ' + ' . $slope . ' * log(X)';
     }
 
     /**
@@ -56,17 +56,20 @@ class LogarithmicBestFit extends BestFit
      *
      * @param float[] $yValues The set of Y-values for this regression
      * @param float[] $xValues The set of X-values for this regression
+     * @param bool $const
      */
-    private function logarithmicRegression(array $yValues, array $xValues, bool $const): void
+    private function logarithmicRegression($yValues, $xValues, $const)
     {
-        $adjustedYValues = array_map(
-            function ($value) {
-                return ($value < 0.0) ? 0 - log(abs($value)) : log($value);
-            },
-            $yValues
-        );
+        foreach ($xValues as &$value) {
+            if ($value < 0.0) {
+                $value = 0 - log(abs($value));
+            } elseif ($value > 0.0) {
+                $value = log($value);
+            }
+        }
+        unset($value);
 
-        $this->leastSquareFit($adjustedYValues, $xValues, $const);
+        $this->leastSquareFit($yValues, $xValues, $const);
     }
 
     /**
@@ -78,10 +81,8 @@ class LogarithmicBestFit extends BestFit
      */
     public function __construct($yValues, $xValues = [], $const = true)
     {
-        parent::__construct($yValues, $xValues);
-
-        if (!$this->error) {
-            $this->logarithmicRegression($yValues, $xValues, (bool) $const);
+        if (parent::__construct($yValues, $xValues) !== false) {
+            $this->logarithmicRegression($yValues, $xValues, $const);
         }
     }
 }

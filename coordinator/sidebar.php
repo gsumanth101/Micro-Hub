@@ -148,13 +148,6 @@ $stmt->close();
               <p>Co-Ordinator Details</p>
             </a>
           </li>
-
- <!--          <li class="nav-item">
-            <a href="../../index3.html" class="nav-link">
-              <i class="fa fa-light fa-caret-right nav-icon"></i>
-              <p>Dashboard v3</p>
-            </a>
-          </li>-->
         </ul>
       </li>
 
@@ -302,17 +295,17 @@ $stmt->close();
       </li>-->
 <!--###################### Hackerthon #################################-->
 
-<!--###################### International Certification #################################-->
-<!--<li class="nav-item">
-  <a href="not_opened.php" class="nav-link">
-    <i class="nav-icon fas fa-chart-pie"></i>
+<!--###################### Internship #################################-->
+<li class="nav-item">
+  <a href="intern_teams.php" class="nav-link">
+    <i class="nav-icon fa fa-inbox"></i>
     <p>
-      International Certificate
+      Phenosoft Internship
     </p>
   </a>
 
-</li>-->
-<!--###################### International Certification #################################-->
+</li>
+<!--###################### Internship #################################-->
 
 <!--######################   Non CGPA  ###########################3-->
 

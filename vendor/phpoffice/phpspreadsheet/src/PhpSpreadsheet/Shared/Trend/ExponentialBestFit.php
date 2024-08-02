@@ -9,7 +9,7 @@ class ExponentialBestFit extends BestFit
      * (Name of this Trend class).
      *
      * @var string
-     */
+     **/
     protected $bestFitType = 'exponential';
 
     /**
@@ -18,10 +18,10 @@ class ExponentialBestFit extends BestFit
      * @param float $xValue X-Value
      *
      * @return float Y-Value
-     */
+     **/
     public function getValueOfYForX($xValue)
     {
-        return $this->getIntersect() * $this->getSlope() ** ($xValue - $this->xOffset);
+        return $this->getIntersect() * pow($this->getSlope(), ($xValue - $this->xOffset));
     }
 
     /**
@@ -30,7 +30,7 @@ class ExponentialBestFit extends BestFit
      * @param float $yValue Y-Value
      *
      * @return float X-Value
-     */
+     **/
     public function getValueOfXForY($yValue)
     {
         return log(($yValue + $this->yOffset) / $this->getIntersect()) / log($this->getSlope());
@@ -42,7 +42,7 @@ class ExponentialBestFit extends BestFit
      * @param int $dp Number of places of decimal precision to display
      *
      * @return string
-     */
+     **/
     public function getEquation($dp = 0)
     {
         $slope = $this->getSlope($dp);
@@ -57,7 +57,7 @@ class ExponentialBestFit extends BestFit
      * @param int $dp Number of places of decimal precision to display
      *
      * @return float
-     */
+     **/
     public function getSlope($dp = 0)
     {
         if ($dp != 0) {
@@ -73,7 +73,7 @@ class ExponentialBestFit extends BestFit
      * @param int $dp Number of places of decimal precision to display
      *
      * @return float
-     */
+     **/
     public function getIntersect($dp = 0)
     {
         if ($dp != 0) {
@@ -88,17 +88,20 @@ class ExponentialBestFit extends BestFit
      *
      * @param float[] $yValues The set of Y-values for this regression
      * @param float[] $xValues The set of X-values for this regression
+     * @param bool $const
      */
-    private function exponentialRegression(array $yValues, array $xValues, bool $const): void
+    private function exponentialRegression($yValues, $xValues, $const)
     {
-        $adjustedYValues = array_map(
-            function ($value) {
-                return ($value < 0.0) ? 0 - log(abs($value)) : log($value);
-            },
-            $yValues
-        );
+        foreach ($yValues as &$value) {
+            if ($value < 0.0) {
+                $value = 0 - log(abs($value));
+            } elseif ($value > 0.0) {
+                $value = log($value);
+            }
+        }
+        unset($value);
 
-        $this->leastSquareFit($adjustedYValues, $xValues, $const);
+        $this->leastSquareFit($yValues, $xValues, $const);
     }
 
     /**
@@ -110,10 +113,8 @@ class ExponentialBestFit extends BestFit
      */
     public function __construct($yValues, $xValues = [], $const = true)
     {
-        parent::__construct($yValues, $xValues);
-
-        if (!$this->error) {
-            $this->exponentialRegression($yValues, $xValues, (bool) $const);
+        if (parent::__construct($yValues, $xValues) !== false) {
+            $this->exponentialRegression($yValues, $xValues, $const);
         }
     }
 }

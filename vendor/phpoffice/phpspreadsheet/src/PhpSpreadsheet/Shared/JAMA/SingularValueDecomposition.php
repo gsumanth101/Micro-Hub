@@ -60,12 +60,15 @@ class SingularValueDecomposition
      *
      * Derived from LINPACK code.
      *
-     * @param mixed $Arg Rectangular matrix
+     * @param $A Rectangular matrix
+     * @param mixed $Arg
+     *
+     * @return Structure to access U, S and V
      */
     public function __construct($Arg)
     {
         // Initialize.
-        $A = $Arg->getArray();
+        $A = $Arg->getArrayCopy();
         $this->m = $Arg->getRowDimension();
         $this->n = $Arg->getColumnDimension();
         $nu = min($this->m, $this->n);
@@ -117,7 +120,7 @@ class SingularValueDecomposition
                 }
             }
 
-            if ($wantu && ($k < $nct)) {
+            if ($wantu and ($k < $nct)) {
                 // Place the transformation in U for subsequent back
                 // multiplication.
                 for ($i = $k; $i < $this->m; ++$i) {
@@ -143,7 +146,7 @@ class SingularValueDecomposition
                     $e[$k + 1] += 1.0;
                 }
                 $e[$k] = -$e[$k];
-                if (($k + 1 < $this->m) && ($e[$k] != 0.0)) {
+                if (($k + 1 < $this->m) and ($e[$k] != 0.0)) {
                     // Apply the transformation.
                     for ($i = $k + 1; $i < $this->m; ++$i) {
                         $work[$i] = 0.0;
@@ -221,7 +224,7 @@ class SingularValueDecomposition
         // If required, generate V.
         if ($wantv) {
             for ($k = $this->n - 1; $k >= 0; --$k) {
-                if (($k < $nrt) && ($e[$k] != 0.0)) {
+                if (($k < $nrt) and ($e[$k] != 0.0)) {
                     for ($j = $k + 1; $j < $nu; ++$j) {
                         $t = 0;
                         for ($i = $k + 1; $i < $this->n; ++$i) {
@@ -243,7 +246,7 @@ class SingularValueDecomposition
         // Main iteration loop for the singular values.
         $pp = $p - 1;
         $iter = 0;
-        $eps = 2.0 ** (-52.0);
+        $eps = pow(2.0, -52.0);
 
         while ($p > 0) {
             // Here is where a test for too many iterations would go.
@@ -315,7 +318,7 @@ class SingularValueDecomposition
                     }
 
                     break;
-                    // Split at negligible s(k).
+                // Split at negligible s(k).
                 case 2:
                     $f = $e[$k - 1];
                     $e[$k - 1] = 0.0;
@@ -336,7 +339,7 @@ class SingularValueDecomposition
                     }
 
                     break;
-                    // Perform one qr step.
+                // Perform one qr step.
                 case 3:
                     // Calculate the shift.
                     $scale = max(max(max(max(abs($this->s[$p - 1]), abs($this->s[$p - 2])), abs($e[$p - 2])), abs($this->s[$k])), abs($e[$k]));
@@ -396,7 +399,7 @@ class SingularValueDecomposition
                     $iter = $iter + 1;
 
                     break;
-                    // Convergence.
+                // Convergence.
                 case 4:
                     // Make the singular values positive.
                     if ($this->s[$k] <= 0.0) {
@@ -415,14 +418,14 @@ class SingularValueDecomposition
                         $t = $this->s[$k];
                         $this->s[$k] = $this->s[$k + 1];
                         $this->s[$k + 1] = $t;
-                        if ($wantv && ($k < $this->n - 1)) {
+                        if ($wantv and ($k < $this->n - 1)) {
                             for ($i = 0; $i < $this->n; ++$i) {
                                 $t = $this->V[$i][$k + 1];
                                 $this->V[$i][$k + 1] = $this->V[$i][$k];
                                 $this->V[$i][$k] = $t;
                             }
                         }
-                        if ($wantu && ($k < $this->m - 1)) {
+                        if ($wantu and ($k < $this->m - 1)) {
                             for ($i = 0; $i < $this->m; ++$i) {
                                 $t = $this->U[$i][$k + 1];
                                 $this->U[$i][$k + 1] = $this->U[$i][$k];
@@ -442,7 +445,7 @@ class SingularValueDecomposition
     /**
      * Return the left singular vectors.
      *
-     * @return Matrix U
+     * @return U
      */
     public function getU()
     {
@@ -452,7 +455,7 @@ class SingularValueDecomposition
     /**
      * Return the right singular vectors.
      *
-     * @return Matrix V
+     * @return V
      */
     public function getV()
     {
@@ -462,7 +465,7 @@ class SingularValueDecomposition
     /**
      * Return the one-dimensional array of singular values.
      *
-     * @return array diagonal of S
+     * @return diagonal of S
      */
     public function getSingularValues()
     {
@@ -472,11 +475,10 @@ class SingularValueDecomposition
     /**
      * Return the diagonal matrix of singular values.
      *
-     * @return Matrix S
+     * @return S
      */
     public function getS()
     {
-        $S = [];
         for ($i = 0; $i < $this->n; ++$i) {
             for ($j = 0; $j < $this->n; ++$j) {
                 $S[$i][$j] = 0.0;
@@ -490,7 +492,7 @@ class SingularValueDecomposition
     /**
      * Two norm.
      *
-     * @return float max(S)
+     * @return max(S)
      */
     public function norm2()
     {
@@ -500,7 +502,7 @@ class SingularValueDecomposition
     /**
      * Two norm condition number.
      *
-     * @return float max(S)/min(S)
+     * @return max(S)/min(S)
      */
     public function cond()
     {
@@ -510,11 +512,11 @@ class SingularValueDecomposition
     /**
      * Effective numerical matrix rank.
      *
-     * @return int Number of nonnegligible singular values
+     * @return Number of nonnegligible singular values
      */
     public function rank()
     {
-        $eps = 2.0 ** (-52.0);
+        $eps = pow(2.0, -52.0);
         $tol = max($this->m, $this->n) * $this->s[0] * $eps;
         $r = 0;
         $iMax = count($this->s);

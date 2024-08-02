@@ -36,16 +36,6 @@ class SheetView
     private $zoomScaleNormal = 100;
 
     /**
-     * ShowZeros.
-     *
-     * If true, "null" values from a calculation will be shown as "0". This is the default Excel behaviour and can be changed
-     * with the advanced worksheet option "Show a zero in cells that have zero value"
-     *
-     * @var bool
-     */
-    private $showZeros = true;
-
-    /**
      * View.
      *
      * Valid values range from 10 to 400.
@@ -75,16 +65,18 @@ class SheetView
      * Set ZoomScale.
      * Valid values range from 10 to 400.
      *
-     * @param int $zoomScale
+     * @param int $pValue
      *
-     * @return $this
+     * @throws PhpSpreadsheetException
+     *
+     * @return SheetView
      */
-    public function setZoomScale($zoomScale)
+    public function setZoomScale($pValue)
     {
         // Microsoft Office Excel 2007 only allows setting a scale between 10 and 400 via the user interface,
         // but it is apparently still able to handle any scale >= 1
-        if (($zoomScale >= 1) || $zoomScale === null) {
-            $this->zoomScale = $zoomScale;
+        if (($pValue >= 1) || $pValue === null) {
+            $this->zoomScale = $pValue;
         } else {
             throw new PhpSpreadsheetException('Scale must be greater than or equal to 1.');
         }
@@ -106,37 +98,21 @@ class SheetView
      * Set ZoomScale.
      * Valid values range from 10 to 400.
      *
-     * @param int $zoomScaleNormal
+     * @param int $pValue
      *
-     * @return $this
+     * @throws PhpSpreadsheetException
+     *
+     * @return SheetView
      */
-    public function setZoomScaleNormal($zoomScaleNormal)
+    public function setZoomScaleNormal($pValue)
     {
-        if (($zoomScaleNormal >= 1) || $zoomScaleNormal === null) {
-            $this->zoomScaleNormal = $zoomScaleNormal;
+        if (($pValue >= 1) || $pValue === null) {
+            $this->zoomScaleNormal = $pValue;
         } else {
             throw new PhpSpreadsheetException('Scale must be greater than or equal to 1.');
         }
 
         return $this;
-    }
-
-    /**
-     * Set ShowZeroes setting.
-     *
-     * @param bool $showZeros
-     */
-    public function setShowZeros($showZeros): void
-    {
-        $this->showZeros = $showZeros;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getShowZeros()
-    {
-        return $this->showZeros;
     }
 
     /**
@@ -157,18 +133,20 @@ class SheetView
      *        'pageLayout'        self::SHEETVIEW_PAGE_LAYOUT
      *        'pageBreakPreview'  self::SHEETVIEW_PAGE_BREAK_PREVIEW
      *
-     * @param string $sheetViewType
+     * @param string $pValue
      *
-     * @return $this
+     * @throws PhpSpreadsheetException
+     *
+     * @return SheetView
      */
-    public function setView($sheetViewType)
+    public function setView($pValue)
     {
         // MS Excel 2007 allows setting the view to 'normal', 'pageLayout' or 'pageBreakPreview' via the user interface
-        if ($sheetViewType === null) {
-            $sheetViewType = self::SHEETVIEW_NORMAL;
+        if ($pValue === null) {
+            $pValue = self::SHEETVIEW_NORMAL;
         }
-        if (in_array($sheetViewType, self::$sheetViewTypes)) {
-            $this->sheetviewType = $sheetViewType;
+        if (in_array($pValue, self::$sheetViewTypes)) {
+            $this->sheetviewType = $pValue;
         } else {
             throw new PhpSpreadsheetException('Invalid sheetview layout type.');
         }

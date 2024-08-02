@@ -126,7 +126,7 @@ $stmt->close();
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item">
+    <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
@@ -147,12 +147,6 @@ $stmt->close();
               <p>Submission Status</p>
             </a>
           </li>
- <!--          <li class="nav-item">
-            <a href="../../index3.html" class="nav-link">
-              <i class="fa fa-light fa-caret-right nav-icon"></i>
-              <p>Dashboard v3</p>
-            </a>
-          </li>-->
         </ul>
       </li>
 
@@ -194,46 +188,46 @@ $stmt->close();
 
 <!--###################### End Micro Project #################################-->
 
-<!--######################  Community Service project #################################-->
-     <!-- <li class="nav-item">
+<!--######################  Capstone Project #################################-->
+     <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-copy"></i>
           <p>
-            CSP
+            Capstone Project
             <i class="fas fa-angle-left right"></i>
             <span class="badge badge-info right"></span>
           </p>
         </a>
       
         <ul class="nav nav-treeview">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="not_opened.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Registration</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="not_opened.php" class="nav-link">
+            <a href="caps_team.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
-              <p>Reviews</p>
+              <p>Team Details</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="not_opened.php" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Final Submission</p>
             </a>
           </li>
  
         </ul>
-      </li>-->
+      </li>
 
 
-<!--###################### End Community Service project #################################-->
+<!--###################### Capstone Project #################################-->
 
 <!--###################### Hackerthon #################################-->
-   <!--   <li class="nav-item">
-        <a href="not_opened.php" class="nav-link">
+      <li class="nav-item">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-chart-pie"></i>
           <p>
             Hackathon
@@ -248,16 +242,16 @@ $stmt->close();
             </a>
           </li>
           <li class="nav-item">
-            <a href="not_opened.php" class="nav-link">
+            <a href="hack_submission.php" class="nav-link">
               <i class="fa fa-light fa-caret-right nav-icon"></i>
               <p>Submission</p>
             </a>
           </li>
         </ul>
-      </li>-->
+</li>
 <!--###################### Hackerthon #################################-->
 
-<!--###################### International Certification #################################-->
+<!--###################### Internship #################################-->
 <!--<li class="nav-item">
   <a href="not_opened.php" class="nav-link">
     <i class="nav-icon fa fa-inbox aria-hidden="true"></i>
@@ -267,7 +261,30 @@ $stmt->close();
   </a>
 
 </li>-->
-<!--###################### International Certification #################################-->
+<li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-inbox"></i>
+          <p>
+            Internship
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="intern.php" class="nav-link">
+              <i class="fa fa-light fa-caret-right nav-icon"></i>
+              <p>Team Details</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa fa-light fa-caret-right nav-icon"></i>
+              <p>Reviews</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+<!--###################### Internship #################################-->
 
 <!--######################   Non CGPA  ###########################3-->
 
